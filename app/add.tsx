@@ -3,9 +3,15 @@ import { Link } from "expo-router";
 
 export default function Add() {
     return (
-        <View>
-            <Text>Add</Text>
-            <Link href="../">Home</Link>
-        </View>
+        <View
+      style={{
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
+          <Text>Add Page</Text>
+          <Link href="../">Home</Link>
+    </View>
     )
 }
