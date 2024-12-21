@@ -1,8 +1,13 @@
 import { Stack } from "expo-router";
 
+import { QueryClient, QueryClientProvider } from "react-query";
+
+const queryClient = new QueryClient();
+
 export default function RootLayout() {
   return (
-    <Stack>
+    <QueryClientProvider client={queryClient}>
+       <Stack>
       <Stack.Screen
         name="(home)"
         options={{ title: "Home", headerShown: false }}
@@ -11,5 +16,6 @@ export default function RootLayout() {
         name="add"
       options={{ title: "Add Post", presentation: "modal"}}/>
     </Stack>
+    </QueryClientProvider>
   )
 }
