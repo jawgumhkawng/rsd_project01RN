@@ -19,7 +19,7 @@ export default function Index() {
   const { data, error, isLoading } = useQuery<ItemType[], Error>("posts", fetchItems);
 
   if(isLoading) return <Text>Loading...</Text>
-  if(error) return <Text>Error: hello! There is na ERR!</Text>
+  if (error) return <Text>Error: { error.message }</Text>
   if(!data) return <Text>No data</Text>
 
   return (

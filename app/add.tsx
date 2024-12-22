@@ -43,7 +43,7 @@ const postContent = async (content: string) => {
 };
 
 export default function Add() {
-   const { control, handleSubmit } = useForm();
+   const { control, handleSubmit, formState: { errors} } = useForm<{ content: String }>();
 	const queryClient = useQueryClient();
 	const onSubmit = (data: any) => {
 		add.mutate(data.content);
@@ -65,10 +65,18 @@ export default function Add() {
   return (
 		<View style={styles.container}>
 			<Controller
-				control={control}
+			  control={control}
+			  rules={{
+				  required: true,
+			  }}
 				render={({ field: { onChange, onBlur, value } }) => (
 					<TextInput
-						style={styles.input}
+						style={[
+							styles.input,
+							errors.content && {
+								borderColor: "red",
+							}
+						]}
 						onBlur={onBlur}
 						onChangeText={onChange}
 						value={value}
