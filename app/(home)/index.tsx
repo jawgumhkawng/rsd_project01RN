@@ -6,7 +6,7 @@ import { useQuery } from "react-query";
 import type { ItemType } from "../../types/ItemType";
 
 async function fetchItems(): Promise<ItemType[]> {
-	const res = await fetch("http://localhost:8000/posts");
+	const res = await fetch("http://192.168.100.160:8000/posts");
 	
     if (!res.ok) {
 		throw new Error("Network res was not ok");

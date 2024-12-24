@@ -1,5 +1,6 @@
-import { Text, View } from "react-native";
-import { Link } from "expo-router"; 
+import { View } from "react-native";
+
+import { ThemeSwitchButton } from "../../components/ThemeSwitchButton";
 
 export default function Index() {
   return (
@@ -9,9 +10,8 @@ export default function Index() {
         justifyContent: "center",
         alignItems: "center",
       }}
-    >
-          <Text>Setting</Text>
-          <Link href="/">Home</Link>
+    >       
+          <ThemeSwitchButton />
     </View>
   );
 }

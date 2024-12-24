@@ -1,5 +1,5 @@
-import { Text, View } from "react-native";
-import { Link } from "expo-router"; 
+import {  View } from "react-native";
+import Text from "../../components/Text";
 
 export default function Index() {
   return (
@@ -11,7 +11,7 @@ export default function Index() {
       }}
     >
           <Text>Search</Text>
-          <Link href="/">Home</Link>
+        
     </View>
   );
 }

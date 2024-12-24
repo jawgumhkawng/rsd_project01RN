@@ -1,10 +1,11 @@
 import React from "react";
 
 import { TextInput, Button, StyleSheet, View } from "react-native";
-import { Link, router } from "expo-router";
+import { router } from "expo-router";
 import { useForm, Controller } from "react-hook-form";
 import { useMutation, useQueryClient } from "react-query";
 import type { ItemType } from "../types/ItemType";
+import { useTheme } from "@react-navigation/native";
 
 const styles = StyleSheet.create({
 	container: {
@@ -12,8 +13,9 @@ const styles = StyleSheet.create({
 	},
 	input: {
 		height: 100,
-		borderColor: "gray",
+		borderColor: "#ccc",
 		borderWidth: 1,
+		borderRadius: 5,
 		marginBottom: 10,
 		padding: 10,
 		fontSize: 18,
@@ -27,6 +29,8 @@ const styles = StyleSheet.create({
 		color: "white",
 	},
 });
+
+
 
 const postContent = async (content: string) => {
 	const res = await fetch("http://localhost:8000/posts", {
@@ -43,9 +47,16 @@ const postContent = async (content: string) => {
 };
 
 export default function Add() {
-   const { control, handleSubmit, formState: { errors} } = useForm<{ content: String }>();
+	const {
+		control,
+		handleSubmit,
+		formState: { errors }
+	} = useForm<{ content: String }>();
+	
 	const queryClient = useQueryClient();
-	const onSubmit = (data: any) => {
+	const colors = useTheme();
+
+	const onSubmit = (data: { content: string }) => {
 		add.mutate(data.content);
 		router.push("../");
   };
@@ -53,7 +64,9 @@ export default function Add() {
   const add = useMutation(postContent, {
 		onSuccess: async item => {
 			await queryClient.cancelQueries("posts");
-			await queryClient.setQueryData<ItemType[] | undefined>("posts", old => {
+		  await queryClient.setQueryData<ItemType[] | undefined>(
+			  "posts",
+			  old => {
                 return old ? [...old, item] : [item];
             });
 		},
@@ -73,9 +86,10 @@ export default function Add() {
 					<TextInput
 						style={[
 							styles.input,
+							{ color: colors.text, borderColor: colors.border},
 							errors.content && {
 								borderColor: "red",
-							}
+							},
 						]}
 						onBlur={onBlur}
 						onChangeText={onChange}
@@ -91,13 +105,7 @@ export default function Add() {
 				title="Submit"
 				onPress={handleSubmit(onSubmit)}
 			/>
-			<View style={{ marginTop: 10 }}>
-				<Link
-					href="../"
-					style={{ textAlign: "center" }}>
-					Cancel
-				</Link>
-			</View>
+			
 		</View>
 	);
 }
