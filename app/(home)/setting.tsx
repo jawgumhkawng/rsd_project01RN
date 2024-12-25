@@ -2,7 +2,7 @@ import { View } from "react-native";
 
 import { ThemeSwitchButton } from "../../components/ThemeSwitchButton";
 
-export default function Index() {
+export default function Settings() {
   return (
     <View
       style={{

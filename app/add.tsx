@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
 
 
 const postContent = async (content: string) => {
-	const res = await fetch("http://localhost:8000/posts", {
+	const res = await fetch("http://192.168.1.8:8000/posts", {
 		method: "POST",
 		headers: {
 			"Content-Type": "application/json",
@@ -54,7 +54,7 @@ export default function Add() {
 	} = useForm<{ content: String }>();
 	
 	const queryClient = useQueryClient();
-	const colors = useTheme();
+	const {colors} = useTheme();
 
 	const onSubmit = (data: { content: string }) => {
 		add.mutate(data.content);

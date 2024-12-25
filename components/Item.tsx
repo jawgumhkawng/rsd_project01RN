@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
 });
 
 async function deleteItem(id: number) {
-    const res = await fetch(`http://localhost:8000/posts/${id}`, {
+    const res = await fetch(`http://192.168.1.8:8000/posts/${id}`, {
         method: 'DELETE',
     });
     if (!res.ok) {

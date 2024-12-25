@@ -4,7 +4,7 @@ import { TouchableOpacity } from "react-native";
 import { useTheme } from '@react-navigation/native';
 
 export default function Home() {
-    const colors = useTheme();
+    const {colors} = useTheme();
     return (
         <Tabs screenOptions={{ tabBarActiveTintColor: "#F72C5B"}}>
             <Tabs.Screen
